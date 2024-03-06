@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  perfiles:
+    image: perfiles:7
+    depends_on:
+      - db-perfiles
+    ports:
+      - "8080:8080"
+    restart: on-failure
+    environment:
+      APP_NAME: tomi
+      SPRING_DATASOURCE_URL: jdbc:mysql://db-perfiles:3306/perfiles
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+
+  db-perfiles:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: perfiles
+    ports:
+      - "3307:3306"
+
